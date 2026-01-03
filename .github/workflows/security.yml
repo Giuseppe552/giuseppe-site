@@ -1,0 +1,48 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run weekly on Monday at 09:00 UTC
+    - cron: "0 9 * * 1"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm audit --audit-level=moderate
+        # Note: --audit-level=moderate warns on moderate/high/critical
+        # Change to --audit-level=high if you want to allow moderate
+        # Use --audit-level=critical to only block critical vulnerabilities
+
+  # Optional: SBOM generation for supply chain visibility
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - run: npm ci
+      
+      # Generate SBOM using cyclonedx (install if needed)
+      - run: npm install -g @cyclonedx/npm
+      - run: cyclonedx-npm --output-file sbom.json
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sbom
+          path: sbom.json
