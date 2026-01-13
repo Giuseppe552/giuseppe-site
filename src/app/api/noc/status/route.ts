@@ -1,6 +1,6 @@
 // src/app/api/noc/status/route.ts
 import { NextResponse } from "next/server";
-import { supabaseServer } from "@/lib/supabase";
+import { getSupabaseServer } from "@/lib/supabase";
 
 // Keep Node runtime so status shares the same process as sibling endpoints if needed
 export const runtime = "nodejs";
@@ -83,7 +83,8 @@ function synthLogs(count: number): string[] {
 export async function GET() {
   // Try to read “real” state from Supabase first
   try {
-    const supa = supabaseServer();
+    const supa = getSupabaseServer();
+    if (!supa) return NextResponse.json(defaultPayload());
 
     // Open/mitigated incidents drive tiles + metrics
     const { data: incidents, error: incErr } = await supa

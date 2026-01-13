@@ -1,7 +1,7 @@
 // src/app/api/noc/trigger/route.ts
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { supabaseServer } from "@/lib/supabase";
+import { getSupabaseServer } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -48,7 +48,8 @@ function synthLogs(count: number): string[] {
 }
 
 async function buildPayload(): Promise<StatusPayload> {
-  const supa = supabaseServer();
+  const supa = getSupabaseServer();
+  if (!supa) throw new Error("supabase_not_configured");
 
   const { data: incidents } = await supa
     .from("noc_incidents")
@@ -194,7 +195,13 @@ export async function POST(req: Request) {
         ? "Burst traffic without autoscaling"
         : "Cache eviction misconfig";
 
-    const supa = supabaseServer();
+    const supa = getSupabaseServer();
+    if (!supa) {
+      return NextResponse.json(
+        { ok: false, disabled: true, error: "supabase_not_configured" },
+        { status: 501 }
+      );
+    }
 
     // Create incident
     const { data: inc, error } = await supa

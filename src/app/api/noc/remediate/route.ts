@@ -1,6 +1,6 @@
 // src/app/api/noc/remediate/route.ts
 import { NextResponse } from "next/server";
-import { supabaseServer } from "@/lib/supabase";
+import { getSupabaseServer } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -48,7 +48,8 @@ function synthLogs(count: number): string[] {
 
 /** Build the UI payload from DB state (same as /api/noc/trigger) */
 async function buildPayload(): Promise<StatusPayload> {
-  const supa = supabaseServer();
+  const supa = getSupabaseServer();
+  if (!supa) throw new Error("supabase_not_configured");
 
   const { data: incidents } = await supa
     .from("noc_incidents")
@@ -152,7 +153,13 @@ export async function POST(req: Request) {
     const requested: ServiceName | undefined =
       SERVICES.includes(body?.service) ? body.service : undefined;
 
-    const supa = supabaseServer();
+    const supa = getSupabaseServer();
+    if (!supa) {
+      return NextResponse.json(
+        { ok: false, disabled: true, error: "supabase_not_configured" },
+        { status: 501 }
+      );
+    }
 
     // Pick the latest incident to act on (optionally for a specific service)
     let q = supa

@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
 export const revalidate = 0;
 
 export async function GET() {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { ok: false, disabled: true, error: "supabase_not_configured" },
+        { status: 501 }
+      );
+    }
+
     const [servicesRes, incidentsRes] = await Promise.all([
       supabaseAdmin.from("services").select("*").order("created_at", { ascending: true }),
       supabaseAdmin.from("incidents")

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { supabaseServer } from "@/lib/supabase";
+import { getSupabaseServer } from "@/lib/supabase";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const runtime = "nodejs";
 
@@ -25,7 +26,13 @@ const STATUSES: StatusKey[] = ["open", "mitigated", "resolved"];
  *  - single:{ ok:true, item, events? }
  */
 export async function GET(req: Request) {
-  const supa = supabaseServer();
+  const supa = getSupabaseServer();
+  if (!supa) {
+    return NextResponse.json(
+      { ok: false, disabled: true, error: "supabase_not_configured" },
+      { status: 501 }
+    );
+  }
   const url = new URL(req.url);
 
   try {
@@ -174,7 +181,7 @@ function withNoStore(res: NextResponse) {
   return res;
 }
 
-async function getCounts(supa: ReturnType<typeof supabaseServer>) {
+async function getCounts(supa: SupabaseClient) {
   const counts: Record<StatusKey, number> = { open: 0, mitigated: 0, resolved: 0 };
 
   // Small, separate aggregate queries (cheap on our tiny dataset)

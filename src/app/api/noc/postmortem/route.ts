@@ -1,6 +1,6 @@
 // src/app/api/noc/postmortem/route.ts
 import { NextResponse } from "next/server";
-import { supabaseServer } from "@/lib/supabase";
+import { getSupabaseServer } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -19,7 +19,13 @@ export async function GET(req: Request) {
       );
     }
 
-    const supa = supabaseServer();
+    const supa = getSupabaseServer();
+    if (!supa) {
+      return NextResponse.json(
+        { ok: false, disabled: true, error: "supabase_not_configured" },
+        { status: 501 }
+      );
+    }
 
     // Incident
     const { data: incident, error: incErr } = await supa

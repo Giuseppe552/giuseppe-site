@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function GET() {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { ok: false, disabled: true, error: "supabase_not_configured" },
+        { status: 501 }
+      );
+    }
+
     // Simple synthetic calculation:
     // Open incidents increase latency/error/cpu; otherwise keep baseline low.
     const { data: openIncidents, error } = await supabaseAdmin
