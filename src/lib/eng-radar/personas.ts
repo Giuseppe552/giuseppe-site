@@ -36,7 +36,7 @@ export const PERSONAS: Record<PersonaId, PersonaConfig> = {
     id: "devops_sre",
     label: "DevOps / SRE / Platform",
     description:
-      "Engineers who own infrastructure, CI/CD, and reliability of production systems.",
+      "Engineers who own infrastructure, CI/CD, and reliability of running systems.",
     bioKeywords: [
       "devops",
       "sre",

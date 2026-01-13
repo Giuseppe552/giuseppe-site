@@ -16,7 +16,6 @@ import {
   Shield,
   AlertTriangle,
 } from "lucide-react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ---------------- types ---------------- */
@@ -266,7 +265,7 @@ export default function CalendarAIPage() {
 
     // Pre-block if UI knows the viewer has no remaining uses (owner bypass)
     if (quota && !quota.allowed && !isOwner) {
-      setError("Daily demo limit reached. Email hello@giuseppegiona.com for access.");
+      setError("Daily demo limit reached. Message me on LinkedIn for access.");
       return;
     }
 
@@ -315,7 +314,7 @@ export default function CalendarAIPage() {
       if (!res.ok || !data?.ok) {
         if (data?.error === "quota_exceeded") {
           throw new Error(
-            "Demo limit reached for today. Email hello@giuseppegiona.com for access."
+            "Demo limit reached for today. Message me on LinkedIn for access."
           );
         }
         if (data?.error === "unauthenticated") {
@@ -392,13 +391,7 @@ export default function CalendarAIPage() {
           className="absolute inset-0 -z-10"
           style={{ transform: `translateY(${parallax}px)` }}
         >
-          <Image
-            src="/hero/skyline.jpg"
-            alt=""
-            fill
-            priority
-            className="object-cover opacity-90"
-          />
+          <div aria-hidden className="absolute inset-0 bg-zinc-950" />
           <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/40 to-black" />
         </motion.div>
 
@@ -418,8 +411,7 @@ export default function CalendarAIPage() {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="mt-4 text-4xl font-semibold leading-[1.05] sm:text-5xl"
           >
-            Type or speak. I’ll plan your day{" "}
-            <span className="text-teal-300">safely</span>.
+            Type or speak. I’ll plan your day.
           </motion.h1>
 
           <motion.p
@@ -428,8 +420,8 @@ export default function CalendarAIPage() {
             transition={{ duration: 0.5, delay: 0.12 }}
             className="mt-3 max-w-2xl text-zinc-300"
           >
-            Natural language → protected calendar blocks. Least-privilege,
-            auditable, and fast.
+            Natural language → calendar blocks. Goal: small OAuth scopes, clear
+            errors, and a safe public demo.
           </motion.p>
         </div>
       </section>
@@ -906,7 +898,9 @@ export default function CalendarAIPage() {
 
         <div className="mt-4 flex flex-wrap gap-2">
           <a
-            href="mailto:hello@giuseppegiona.com?subject=Calendar-AI%20access"
+            href="https://www.linkedin.com/in/giuseppegiona"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm hover:bg-white/15"
           >
             Get private access

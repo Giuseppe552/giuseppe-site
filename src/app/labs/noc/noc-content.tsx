@@ -16,7 +16,6 @@ import {
   Link as LinkIcon,
   CheckCircle2,
 } from "lucide-react";
-import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 /* ---------------- types ---------------- */
@@ -363,7 +362,7 @@ export default function NocContent() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <Image src="/hero/skyline.jpg" alt="" fill priority className="object-cover opacity-90" />
+          <div aria-hidden className="absolute inset-0 bg-zinc-950" />
           {/* gradient overlay */}
           <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/40 to-black" />
         </div>

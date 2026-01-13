@@ -2,7 +2,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowUpRight } from "lucide-react";
@@ -12,7 +11,6 @@ type Lab = {
   title: string;
   tag: string;
   summary: string;
-  cover: string;
   cta?: { href: string; label: string; external?: boolean };
 };
 
@@ -24,7 +22,6 @@ const LABS: Lab[] = [
     tag: "Ops / SRE",
     summary:
       "Trigger incidents, auto-remediate, read service-specific runbooks, and view a live timeline—without touching real infra.",
-    cover: "/demo/mini-noc-cover.webp",
     cta: { href: "/labs/noc", label: "Open demo" },
   },
   {
@@ -33,7 +30,6 @@ const LABS: Lab[] = [
     tag: "AI + GCal",
     summary:
       "Type or speak a plan → protected calendar blocks. OAuth, least-privilege scopes, auditable, fast.",
-    cover: "/demo/calendar-ai-cover.webp",
     cta: { href: "/labs/calendar-ai", label: "Open demo" },
   },
   {
@@ -42,7 +38,6 @@ const LABS: Lab[] = [
     tag: "NLP + Hiring",
     summary:
       "Deterministic resume/job spec scoring with explainable signals. Built for recruiters, not hype.",
-    cover: "/demo/ats-ranker-cover.png",
     cta: { href: "/labs/ats", label: "Open demo" },
   },
   {
@@ -50,8 +45,7 @@ const LABS: Lab[] = [
     title: "Infra as Code",
     tag: "Docker + IaC",
     summary:
-      "Repeatable infra with least-privilege, secrets hygiene, metrics & traces. Boringly reliable.",
-    cover: "/demo/infra-cover.png",
+      "Notes and configs for small setups. Still iterating.",
     cta: { href: "/labs/infra", label: "View notes" },
   },
 ];
@@ -59,23 +53,12 @@ const LABS: Lab[] = [
 function LabCard({ lab }: { lab: Lab }) {
   return (
     <div className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 transition hover:border-white/20">
-      <div className="relative h-44 w-full overflow-hidden">
-        <Image
-          src={lab.cover}
-          alt={lab.title}
-          fill
-          className="object-cover transition duration-300 group-hover:scale-[1.02]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={lab.slug === "noc"} // make the new one feel snappy
-        />
-        <div className="absolute left-3 top-3">
-          <span className="rounded-full bg-black/60 px-2 py-1 text-xs text-teal-300 backdrop-blur">
+      <div className="p-5">
+        <div className="mb-3">
+          <span className="rounded-full bg-black/40 px-2 py-1 text-xs text-teal-300 backdrop-blur">
             {lab.tag}
           </span>
         </div>
-      </div>
-
-      <div className="p-5">
         <div className="mb-1 text-lg font-medium">{lab.title}</div>
         <p className="text-sm text-zinc-400">{lab.summary}</p>
 
@@ -114,11 +97,11 @@ export default function LabsPage() {
           }}
         />
         <h1 className="text-center text-4xl font-semibold sm:text-5xl">
-          Hands-on demos that ship.
+          Demos you can click.
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-center text-zinc-300">
-          Small, focused experiments you can click, break, and view the code for.
-          Built with production patterns—auth, scopes, 2FA, testing, deploys.
+          Small experiments you can click and break.
+          Some have auth/scopes/2FA. Each page says what’s wired up.
         </p>
       </section>
 
@@ -132,8 +115,13 @@ export default function LabsPage() {
 
         {/* CTA */}
         <div className="mt-10 text-center">
-          <Link href="mailto:contact.giuseppe00@gmail.com" className="btn-accent">
-            Commission a mini-build
+          <Link
+            href="https://www.linkedin.com/in/giuseppegiona"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-accent"
+          >
+            Message me on LinkedIn
           </Link>
         </div>
       </section>

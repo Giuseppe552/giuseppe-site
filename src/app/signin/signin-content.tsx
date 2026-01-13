@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { Mail } from "lucide-react";
 
 export default function SignInContent() {
   const params = useSearchParams();
@@ -66,7 +65,6 @@ export default function SignInContent() {
             onClick={() => router.push("/labs/calendar-ai")}
             className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/4 px-4 py-2.5 text-sm text-white transition hover:bg-white/8"
           >
-            <Mail className="h-4 w-4" />
             View the demo first
           </button>
 
@@ -85,7 +83,7 @@ export default function SignInContent() {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Audit & revoke anytime
           </span>
           <span className="inline-flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Fast, boringly reliable
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Simple and focused
           </span>
         </div>
       </section>

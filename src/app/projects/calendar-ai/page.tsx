@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,13 +22,12 @@ import {
 
 export default function CalendarAIProject() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-white text-slate-900">
       <Header />
       <Hero />
       <Overview />
       <DemoCta />
       <Sections />
-      <Gallery />
       <Faq />
       <Footer className="mt-20" />
     </main>
@@ -51,16 +49,16 @@ function Hero() {
         }}
       />
       <div className="mx-auto max-w-6xl px-6 pb-12 pt-16 sm:pb-16 sm:pt-24">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-zinc-300">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-slate-500">
           Project • AI + Google Calendar
         </div>
         <h1 className="mt-5 text-4xl font-semibold leading-tight sm:text-6xl">
           Calendar-AI — type or speak,{" "}
-          <span className="text-teal-300">I’ll plan your day safely</span>.
+          <span className="text-teal-600">I’ll plan your day</span>.
         </h1>
-        <p className="mt-4 max-w-2xl text-zinc-300">
-          Natural-language → protected calendar blocks. Least-privilege OAuth,
-          auditable actions, and fast, boring reliability.
+        <p className="mt-4 max-w-2xl text-slate-600">
+          Natural language → calendar blocks. Goal: small OAuth scopes, audit events,
+          and clear errors.
         </p>
 
         <div className="mt-7 flex flex-wrap gap-3">
@@ -71,13 +69,13 @@ function Hero() {
             <PlayCircle className="h-4 w-4" />
             Watch walkthrough
           </Ghost>
-          <Ghost href="mailto:contact.giuseppe00@gmail.com" external>
-            Contact
+          <Ghost href="https://www.linkedin.com/in/giuseppegiona" external>
+            LinkedIn
           </Ghost>
         </div>
 
         {/* quick chips */}
-        <div className="mt-6 flex flex-wrap gap-2 text-xs text-zinc-400">
+        <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-600">
           <Chip>Next.js</Chip>
           <Chip>TypeScript</Chip>
           <Chip>Google Calendar API</Chip>
@@ -105,13 +103,13 @@ function Overview() {
         />
         <Panel
           icon={ShieldCheck}
-          title="Security by default"
-          text="Google OAuth with least-privilege scopes, per-action consent, and audit events. Public demo is sandboxed."
+          title="Security constraints"
+          text="Goal: keep OAuth scopes minimal, log actions, and sandbox the public demo."
         />
         <Panel
           icon={Zap}
-          title="Fast & boringly reliable"
-          text="Small idempotent jobs, retries with back-off, and observability. If it fails, it tells you why."
+          title="Predictable behavior"
+          text="Small steps, explicit errors, and retries where it makes sense."
         />
       </div>
     </section>
@@ -123,14 +121,14 @@ function Overview() {
 function DemoCta() {
   return (
     <section className="mx-auto max-w-6xl px-6 pb-12">
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/50 p-6 sm:p-10">
+      <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-10">
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
-            <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-black/50">
-              <Calendar className="h-4 w-4 text-zinc-300" />
+            <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white">
+              <Calendar className="h-4 w-4 text-slate-600" />
             </div>
             <h3 className="text-2xl font-semibold">Try the sandbox</h3>
-            <p className="mt-2 text-zinc-300">
+            <p className="mt-2 text-slate-600">
               Everyone can open the interface. On “Add to calendar” you’ll see a
               gate: sign in with Google for a single test or watch the video
               demo. I get unlimited access when I’m logged in.
@@ -139,21 +137,14 @@ function DemoCta() {
               <Primary href="/labs/calendar-ai">
                 Open demo <ArrowRight className="h-4 w-4" />
               </Primary>
-              <Ghost href="/about">How I build securely</Ghost>
             </div>
           </div>
 
           {/* UI preview */}
           <div className="relative">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-              <Image
-                src="/demo/calendar-ai-cover.png"
-                alt="Calendar-AI UI"
-                width={1200}
-                height={760}
-                className="h-64 w-full object-cover sm:h-80"
-                priority
-              />
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+              <div className="text-sm font-medium text-slate-800">No screenshots yet.</div>
+              <p className="mt-2 text-sm text-slate-600">Open the live demo to see the UI.</p>
             </div>
             <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[22px] opacity-30 blur-xl"
               style={{
@@ -183,7 +174,7 @@ function Tabbed() {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
       {/* tabs */}
       <div className="mb-4 flex gap-2">
         {tabs.map((t, i) => (
@@ -192,8 +183,8 @@ function Tabbed() {
             onClick={() => setActive(i)}
             className={`rounded-full px-3 py-1 text-sm transition ${
               active === i
-                ? "bg-white text-black"
-                : "border border-white/10 bg-white/6 text-zinc-300 hover:bg-white/10"
+                ? "bg-slate-900 text-white"
+                : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
             }`}
           >
             {t}
@@ -239,9 +230,9 @@ function FeaturesList() {
 function Architecture() {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-      <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+      <div className="rounded-xl border border-slate-200 bg-white p-4">
         <h4 className="mb-2 text-lg font-medium">Flow</h4>
-        <ol className="list-inside list-decimal space-y-2 text-sm text-zinc-300">
+        <ol className="list-inside list-decimal space-y-2 text-sm text-slate-700">
           <li>Input: text or voice → transcript</li>
           <li>Zod validate + parse intents</li>
           <li>Preview: read-only fetches to detect conflicts</li>
@@ -249,9 +240,9 @@ function Architecture() {
           <li>Audit: store summary (no sensitive body)</li>
         </ol>
       </div>
-      <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+      <div className="rounded-xl border border-slate-200 bg-white p-4">
         <h4 className="mb-3 text-lg font-medium">Tech</h4>
-        <div className="flex flex-wrap gap-2 text-xs text-zinc-300">
+        <div className="flex flex-wrap gap-2 text-xs text-slate-700">
           <Chip>Next.js App Router</Chip>
           <Chip>TypeScript</Chip>
           <Chip>NextAuth (Google)</Chip>
@@ -261,7 +252,7 @@ function Architecture() {
           <Chip>Postgres / Prisma (optional)</Chip>
           <Chip>Vercel</Chip>
         </div>
-        <p className="mt-3 text-sm text-zinc-400">
+        <p className="mt-3 text-sm text-slate-600">
           The same pattern appears across my demos: small, typed units with
           explicit side-effects and clear handover.
         </p>
@@ -289,55 +280,17 @@ function Security() {
   );
 }
 
-/* ------------------------ Gallery ------------------------ */
-
-function Gallery() {
-  return (
-    <section className="mx-auto max-w-6xl px-6 pb-6">
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-xl font-medium">Screens</h3>
-        <Link
-          href="/labs/calendar-ai"
-          className="inline-flex items-center gap-1 text-sm text-zinc-300 hover:text-white"
-        >
-          Try it live <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {[
-          { src: "/demo/calendar-ai-cover.png", alt: "Compose plan" },
-          { src: "/demo/blog-ops.png", alt: "Preview conflicts" },
-          { src: "/demo/blog-security.png", alt: "Confirm + audit" },
-        ].map((img) => (
-          <div
-            key={img.alt}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-black/40"
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={1200}
-              height={760}
-              className="h-52 w-full object-cover"
-            />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 /* ------------------------ FAQ ------------------------ */
 
 function Faq() {
   return (
     <section className="mx-auto max-w-6xl px-6 pb-20">
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6">
         <h3 className="text-xl font-medium">FAQ</h3>
-        <div className="mt-4 space-y-4 text-sm text-zinc-300">
+        <div className="mt-4 space-y-4 text-sm text-slate-700">
           <div>
             <div className="font-medium">How does the public gate work?</div>
-            <p className="mt-1 text-zinc-400">
+            <p className="mt-1 text-slate-600">
               Anyone can type/speak and preview. When they press <em>Add to
               calendar</em> we show a modal: Sign in with Google for one test,
               or watch the video. My account has unlimited writes.
@@ -345,14 +298,14 @@ function Faq() {
           </div>
           <div>
             <div className="font-medium">What about sensitive event data?</div>
-            <p className="mt-1 text-zinc-400">
+            <p className="mt-1 text-slate-600">
               We avoid storing event bodies. Audits store metadata and hashed
               intent strings only.
             </p>
           </div>
           <div>
             <div className="font-medium">Can this be adapted for teams?</div>
-            <p className="mt-1 text-zinc-400">
+            <p className="mt-1 text-slate-600">
               Yes—role-based scopes, shared calendars, and approval flows are
               straightforward extensions of this base.
             </p>
@@ -379,7 +332,7 @@ function Primary({
     <Cmp
       href={href}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-medium text-black transition hover:opacity-90"
+      className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
     >
       {children}
     </Cmp>
@@ -400,7 +353,7 @@ function Ghost({
     <Cmp
       href={href}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/6 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 transition hover:bg-slate-50"
     >
       {children}
     </Cmp>
@@ -409,7 +362,7 @@ function Ghost({
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-white/10 bg-white/6 px-2 py-1">
+    <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-slate-600">
       {children}
     </span>
   );
@@ -425,12 +378,12 @@ function Panel({
   text: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
-      <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-black/50">
-        <Icon className="h-4 w-4 text-zinc-300" />
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-50">
+        <Icon className="h-4 w-4 text-slate-600" />
       </div>
       <div className="text-base font-medium">{title}</div>
-      <div className="mt-1 text-sm text-zinc-400">{text}</div>
+      <div className="mt-1 text-sm text-slate-600">{text}</div>
     </div>
   );
 }
@@ -445,21 +398,21 @@ function Feature({
   text: string;
 }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-black/40 p-4">
-      <div className="mb-2 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-black/50">
-        <Icon className="h-4 w-4 text-zinc-300" />
+    <div className="rounded-xl border border-slate-200 bg-white p-4">
+      <div className="mb-2 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-50">
+        <Icon className="h-4 w-4 text-slate-600" />
       </div>
       <div className="text-sm font-medium">{title}</div>
-      <div className="mt-1 text-sm text-zinc-400">{text}</div>
+      <div className="mt-1 text-sm text-slate-600">{text}</div>
     </div>
   );
 }
 
 function SecurityCard({ title, text }: { title: string; text: string }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+    <div className="rounded-xl border border-slate-200 bg-white p-4">
       <div className="text-sm font-medium">{title}</div>
-      <div className="mt-1 text-sm text-zinc-400">{text}</div>
+      <div className="mt-1 text-sm text-slate-600">{text}</div>
     </div>
   );
 }

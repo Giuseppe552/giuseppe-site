@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={[
           GeistSans.variable,
           GeistMono.variable,
-          "bg-black text-white antialiased ff-sans selection:bg-emerald-300/20 selection:text-white",
+          "bg-white text-slate-800 antialiased ff-sans selection:bg-teal-500/20 selection:text-slate-900",
         ].join(" ")}
         style={{
           fontFeatureSettings: '"kern","liga","calt","ss01"',
@@ -85,16 +85,16 @@ function BackgroundDecor() {
         className="pointer-events-none fixed inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(1200px 600px at 50% -10%, rgba(34,197,94,0.12), transparent 60%), radial-gradient(900px 500px at 85% 0%, rgba(59,130,246,0.16), transparent 60%)",
+            "radial-gradient(1200px 600px at 50% -10%, rgba(20,184,166,0.06), transparent 60%), radial-gradient(900px 500px at 85% 0%, rgba(79,70,229,0.04), transparent 60%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.06]"
+        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.4]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px)",
-          backgroundSize: "32px 32px, 32px 32px",
+            "linear-gradient(rgba(226,232,240,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(226,232,240,.5) 1px, transparent 1px)",
+          backgroundSize: "48px 48px, 48px 48px",
         }}
       />
     </>

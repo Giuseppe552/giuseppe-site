@@ -6,10 +6,7 @@ import { usePathname } from "next/navigation";
 import { Github, Linkedin, Menu, X } from "lucide-react";
 
 /**
- * Calm, minimal header (SRE/DevOps portfolio vibe)
- * - Primary nav: Work / Writing / About / Contact
- * - External icons (GitHub / LinkedIn) are present but not dominant
- * - Mobile drawer with ESC + outside click close
+ * Clean, professional header — light theme
  */
 
 type NavItem = {
@@ -20,10 +17,7 @@ type NavItem = {
 };
 
 const NAV: NavItem[] = [
-  { href: "/work", label: "Work", activeMatch: "startsWith" },
-  { href: "/writing", label: "Writing", activeMatch: "startsWith" }, // ensure this route exists
-  { href: "/about", label: "About", activeMatch: "startsWith" },
-  { href: "mailto:contact.giuseppe00@gmail.com", label: "Contact", external: true, activeMatch: "never" },
+  { href: "/", label: "Projects", activeMatch: "startsWith" },
 ];
 
 const EXTERNAL = {
@@ -39,9 +33,11 @@ function isActive(pathname: string | null, item: NavItem) {
   if (!pathname) return false;
   if (item.activeMatch === "never") return false;
 
+  // The site is projects-only: / is the index, /projects/* are details.
+  if (item.href === "/") return pathname === "/" || pathname.startsWith("/projects/");
+
   if (item.activeMatch === "exact") return pathname === item.href;
 
-  // default: startsWith for section pages
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
@@ -57,7 +53,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close drawer when route changes
   React.useEffect(() => setOpen(false), [pathname]);
 
   return (
@@ -65,22 +60,19 @@ export default function Header() {
       <header
         role="banner"
         className={cx(
-          "sticky top-0 z-40 w-full border-b border-white/10 backdrop-blur-lg glass",
-          scrolled && "scroll-elevated"
+          "sticky top-0 z-40 w-full border-b border-slate-200 backdrop-blur-lg",
+          scrolled ? "bg-white/90 shadow-sm" : "bg-white/70"
         )}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Brand */}
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-white transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-2 text-slate-800 transition-colors hover:text-teal-600"
             aria-label="Giuseppe — Home"
           >
-            <div className="grid h-8 w-8 place-items-center rounded-lg bg-white text-black">
-              <span className="text-sm font-bold">g</span>
-            </div>
-            <span className="hidden text-sm font-semibold tracking-tight sm:inline">
-              giuseppe
+            <span className="text-sm font-semibold tracking-tight">
+              Giuseppe Giona
             </span>
           </Link>
 
@@ -92,8 +84,8 @@ export default function Header() {
                 const base =
                   "nav-link relative inline-flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors";
                 const state = active
-                  ? "active text-cyan-300"
-                  : "text-zinc-300 hover:text-cyan-300";
+                  ? "active text-teal-600"
+                  : "text-slate-600 hover:text-teal-600";
 
                 if (item.external) {
                   return (
@@ -120,14 +112,14 @@ export default function Header() {
               })}
             </nav>
 
-            {/* External icons (kept quiet) */}
-            <div className="ml-2 flex items-center gap-1 border-l border-white/10 pl-2">
+            {/* External icons */}
+            <div className="ml-2 flex items-center gap-1 border-l border-slate-200 pl-2">
               <a
                 href={EXTERNAL.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-zinc-300 transition-colors hover:text-cyan-300 focus-visible:outline-(--ring)"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-slate-500 transition-colors hover:text-teal-600"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -136,7 +128,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-zinc-300 transition-colors hover:text-cyan-300 focus-visible:outline-(--ring)"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-slate-500 transition-colors hover:text-teal-600"
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -151,7 +143,7 @@ export default function Header() {
               aria-haspopup="dialog"
               aria-expanded={open}
               onClick={() => setOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md text-zinc-300 transition-colors hover:text-cyan-300 glass"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 text-slate-600 transition-colors hover:text-teal-600 hover:bg-slate-50"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -195,19 +187,19 @@ function MobileDrawer({
 
   return (
     <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 md:hidden">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm" />
 
       <div
         ref={ref}
-        className="absolute right-3 top-3 w-[88vw] max-w-sm rounded-2xl border border-white/10 bg-zinc-900/90 p-4 shadow-2xl glass"
+        className="absolute right-3 top-3 w-[88vw] max-w-sm rounded-2xl border border-slate-200 bg-white p-4 shadow-xl"
       >
         <div className="mb-1 flex items-center justify-between">
-          <span className="text-sm font-semibold text-white">Menu</span>
+          <span className="text-sm font-semibold text-slate-800">Menu</span>
           <button
             type="button"
             aria-label="Close menu"
             onClick={onClose}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-zinc-300 hover:text-cyan-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-slate-500 hover:text-teal-600"
           >
             <X className="h-5 w-5" />
           </button>
@@ -220,8 +212,8 @@ function MobileDrawer({
             const className = cx(
               "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
               active
-                ? "bg-white/5 text-cyan-300"
-                : "text-zinc-300 hover:bg-white/5 hover:text-cyan-300"
+                ? "bg-teal-50 text-teal-600"
+                : "text-slate-600 hover:bg-slate-50 hover:text-teal-600"
             );
 
             if (item.external) {
@@ -240,12 +232,12 @@ function MobileDrawer({
           })}
         </nav>
 
-        <div className="mt-3 flex items-center gap-2 border-t border-white/10 pt-3">
+        <div className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-3">
           <a
             href={EXTERNAL.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 py-2 text-sm font-medium text-zinc-300 transition hover:bg-white/10"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-slate-200 bg-slate-50 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100"
           >
             <Linkedin className="h-4 w-4" />
             LinkedIn
@@ -254,7 +246,7 @@ function MobileDrawer({
             href={EXTERNAL.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 py-2 text-sm font-medium text-zinc-300 transition hover:bg-white/10"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-slate-200 bg-slate-50 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100"
           >
             <Github className="h-4 w-4" />
             GitHub
