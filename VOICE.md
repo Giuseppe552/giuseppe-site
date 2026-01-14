@@ -1,7 +1,20 @@
 # voice.md — portfolio voice
 
+## Who I am
+Entry level. Learning every day.
+
+I make mistakes. I don't pretend otherwise.
+I'm not a senior engineer with 10 years of battle scars.
+I'm someone who likes building things and figuring out how they break.
+
+Personality: calm, relaxed, positive, friendly. I don't talk much — I'd rather show work than explain it. Humble about what I don't know. Curious about what I haven't tried yet.
+
+This portfolio isn't "look how good I am." It's "here's what I've done so far."
+
+---
+
 ## Rule 1
-If I can’t prove it, I don’t say it.
+If I can't prove it, I don't say it.
 
 Proof means: link, screenshot, log snippet, commit, pipeline run, alert screenshot, runbook, postmortem, or a metric with a baseline.
 
@@ -9,12 +22,13 @@ Proof means: link, screenshot, log snippet, commit, pipeline run, alert screensh
 Stuff I built, broke, fixed, and wrote down.
 
 No big claims.
-Just what I did, what happened, and what I’d do next.
+Just what I did, what happened, and what I'd do next.
 
 ## Tone
 Calm. Direct. Not salesy.
 Short sentences. No long intros.
 Friendly, normal human voice. No cringe.
+Quiet confidence, not loud ego.
 
 ## Normal honesty
 - I mess things up sometimes.
@@ -22,10 +36,12 @@ Friendly, normal human voice. No cringe.
 - Some parts are still rough.
 - If I don’t know yet, I say what I’ll check next.
 
-## Things I won’t do
-- Hype words: “passionate”, “rockstar”, “world-class”, “revolutionary”.
-- “Production-ready” unless I define the boundary and what’s missing.
-- Claim experience I can’t back up with artifacts.
+## Things I won't do
+- Hype words: "rockstar", "world-class", "revolutionary", "guru", "ninja".
+- Oversell my level. I'm entry-level. I say that upfront.
+- "Production-ready" unless I define the boundary and what's missing.
+- Claim experience I can't back up with artifacts.
+- Pretend I know things I'm still learning.
 
 ## Default page format (use everywhere)
 1) What it is (1 line)
