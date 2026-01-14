@@ -5,14 +5,19 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
-  ArrowRight,
   ArrowUpRight,
-  Utensils,
-  Globe,
-  Video,
   FileText,
-  Languages,
-  Sparkles,
+  GitBranch,
+  Server,
+  Shield,
+  Container,
+  Activity,
+  Lock,
+  Workflow,
+  Database,
+  Terminal,
+  Eye,
+  Github,
 } from "lucide-react";
 
 /** ------------------------------------------------------------------------
@@ -26,6 +31,7 @@ export default function GiuseppeFoodProject() {
       <Header />
       <Hero />
       <Overview />
+      <InfraHighlights />
       <LiveSite />
       <Sections />
       <Stats />
@@ -49,20 +55,24 @@ function Hero() {
       />
       <div className="mx-auto max-w-6xl px-6 pb-12 pt-16 sm:pb-16 sm:pt-24">
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-slate-500">
-          Project • Recipe Platform
+          Project • Recipe Platform + DevOps
         </div>
         <h1 className="mt-5 text-4xl font-semibold leading-tight sm:text-6xl">
-          giuseppe.food — recipes from{" "}
-          <span className="text-teal-600">short-form to kitchen</span>.
+          giuseppe.food — production-grade{" "}
+          <span className="text-teal-600">from code to deploy</span>.
         </h1>
         <p className="mt-4 max-w-2xl text-slate-600">
-          Turning viral cooking videos into detailed, actionable recipes.
-          Multi-region support and type-safe content.
+          A recipe platform with full DevOps infrastructure: multi-stage Docker,
+          Terraform IaC, 7-job CI/CD pipeline, OpenTelemetry observability,
+          and Redis-backed rate limiting. Open source.
         </p>
 
         <div className="mt-7 flex flex-wrap gap-3">
           <Primary href="https://giuseppe.food" external>
             Visit live site <ArrowUpRight className="h-4 w-4" />
+          </Primary>
+          <Primary href="https://github.com/resinaro-comm/giuseppe.food" external>
+            <Github className="h-4 w-4" /> View on GitHub
           </Primary>
           <Ghost href="https://www.linkedin.com/in/giuseppegiona" external>
             LinkedIn
@@ -72,11 +82,12 @@ function Hero() {
         <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-600">
           <Chip>Next.js 14</Chip>
           <Chip>TypeScript</Chip>
-          <Chip>React 18</Chip>
-          <Chip>i18n</Chip>
-          <Chip>Tailwind</Chip>
+          <Chip>Docker</Chip>
+          <Chip>Terraform</Chip>
+          <Chip>GitHub Actions</Chip>
+          <Chip>OpenTelemetry</Chip>
+          <Chip>Redis</Chip>
           <Chip>Vercel</Chip>
-          <Chip>Video</Chip>
         </div>
       </div>
     </section>
@@ -90,19 +101,45 @@ function Overview() {
     <section className="mx-auto max-w-6xl px-6 pb-6">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Panel
-          icon={Globe}
-          title="Multi-region"
-          text="US, GB, IT locales. Region-aware content, affiliate links, server-side detection."
+          icon={Workflow}
+          title="7-job CI/CD"
+          text="GitHub Actions: lint, test, build, security scan, Docker, Terraform, deploy + smoke tests."
         />
         <Panel
-          icon={Video}
-          title="Self-hosted video"
-          text="MP4-first for fast playback, with a fallback link when a source changes."
+          icon={Container}
+          title="Multi-stage Docker"
+          text="Alpine base, non-root user, healthcheck endpoint, layer caching. Production-ready images."
         />
         <Panel
-          icon={FileText}
-          title="Type-safe recipes"
-          text="33 recipes as TypeScript objects. Zero runtime content errors, compile-time validation."
+          icon={Server}
+          title="Terraform IaC"
+          text="Vercel project, domains, env vars, and deployment protection managed via Terraform Cloud."
+        />
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------ Infra Highlights ------------------------ */
+
+function InfraHighlights() {
+  return (
+    <section className="mx-auto max-w-6xl px-6 pb-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <Panel
+          icon={Activity}
+          title="OpenTelemetry"
+          text="Distributed tracing with OTLP exporter. Jaeger in docker-compose for local debugging."
+        />
+        <Panel
+          icon={Database}
+          title="Redis rate limiting"
+          text="Upstash REST API with in-memory fallback. Abuse detection with auto-ban escalation."
+        />
+        <Panel
+          icon={Shield}
+          title="Security headers"
+          text="OWASP-aligned CSP, HSTS with preload, X-Frame-Options, Permissions-Policy."
         />
       </div>
     </section>
@@ -118,29 +155,42 @@ function LiveSite() {
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
             <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white">
-              <Utensils className="h-4 w-4 text-slate-600" />
+              <Github className="h-4 w-4 text-slate-600" />
             </div>
-            <h3 className="text-2xl font-semibold">From reels to real cooking</h3>
+            <h3 className="text-2xl font-semibold">Open source and auditable</h3>
             <p className="mt-2 text-slate-600">
-              30-second videos are entertaining but not kitchen-friendly.
-              giuseppe.food bridges the gap with full ingredient lists,
-              step-by-step methods, and video embeds.
+              The entire codebase is public. Explore the Dockerfile, Terraform configs,
+              GitHub Actions workflows, and production-grade patterns. Fork it, learn from it,
+              or hire me to build something similar.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Primary href="https://giuseppe.food" external>
-                Visit site <ArrowUpRight className="h-4 w-4" />
+              <Primary href="https://github.com/resinaro-comm/giuseppe.food" external>
+                <Github className="h-4 w-4" /> View source
               </Primary>
-              <Ghost href="https://giuseppe.food/recipes">
-                Browse recipes
+              <Ghost href="https://giuseppe.food" external>
+                Live site <ArrowUpRight className="h-4 w-4" />
               </Ghost>
             </div>
           </div>
 
           <div className="relative">
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-8">
-              <div className="text-center">
-                <div className="text-5xl font-bold text-teal-600">giuseppe.food</div>
-                <div className="mt-2 text-slate-600">33 recipes and counting</div>
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Terminal className="h-5 w-5 text-teal-600" />
+                  <code className="text-sm text-slate-700">docker compose up</code>
+                </div>
+                <div className="flex items-center gap-3">
+                  <GitBranch className="h-5 w-5 text-teal-600" />
+                  <code className="text-sm text-slate-700">git push origin main</code>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Server className="h-5 w-5 text-teal-600" />
+                  <code className="text-sm text-slate-700">terraform apply</code>
+                </div>
+                <div className="mt-4 text-center text-xs text-slate-500">
+                  Full DevOps workflow included
+                </div>
               </div>
             </div>
           </div>
@@ -161,12 +211,12 @@ function Sections() {
 }
 
 function Tabbed() {
-  const tabs = ["Features", "Content", "Decisions"];
+  const tabs = ["DevOps", "Security", "Observability", "Decisions"];
   const [active, setActive] = useState(0);
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5">
-      <div className="mb-4 flex gap-2">
+      <div className="mb-4 flex flex-wrap gap-2">
         {tabs.map((t, i) => (
           <button
             key={t}
@@ -182,56 +232,156 @@ function Tabbed() {
         ))}
       </div>
 
-      {active === 0 && <FeaturesList />}
-      {active === 1 && <Content />}
-      {active === 2 && <DesignDecisions />}
+      {active === 0 && <DevOpsSection />}
+      {active === 1 && <SecuritySection />}
+      {active === 2 && <ObservabilitySection />}
+      {active === 3 && <DesignDecisions />}
     </div>
   );
 }
 
-function FeaturesList() {
+function DevOpsSection() {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <div className="mb-2 flex items-center gap-2">
+            <Workflow className="h-5 w-5 text-teal-600" />
+            <h4 className="text-lg font-medium">CI/CD Pipeline</h4>
+          </div>
+          <p className="text-sm text-slate-700 mb-3">
+            7-job GitHub Actions workflow with parallel execution:
+          </p>
+          <ul className="text-sm text-slate-600 space-y-1">
+            <li>1. Lint + TypeScript + Prettier check</li>
+            <li>2. Vitest with Codecov coverage</li>
+            <li>3. Next.js production build + artifacts</li>
+            <li>4. npm audit + TruffleHog secret scan</li>
+            <li>5. Docker buildx with layer caching</li>
+            <li>6. Terraform plan/apply</li>
+            <li>7. Vercel deploy + smoke tests</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <div className="mb-2 flex items-center gap-2">
+            <Container className="h-5 w-5 text-teal-600" />
+            <h4 className="text-lg font-medium">Docker Strategy</h4>
+          </div>
+          <p className="text-sm text-slate-700 mb-3">
+            Multi-stage build for minimal production images:
+          </p>
+          <ul className="text-sm text-slate-600 space-y-1">
+            <li>Stage 1: deps - Alpine base, npm ci</li>
+            <li>Stage 2: builder - Compile Next.js standalone</li>
+            <li>Stage 3: runner - Non-root user (uid 1001)</li>
+            <li>Built-in /health endpoint for orchestration</li>
+            <li>libc6-compat for Alpine compatibility</li>
+          </ul>
+        </div>
+      </div>
+      <div className="rounded-xl border border-slate-200 bg-white p-4">
+        <div className="mb-2 flex items-center gap-2">
+          <Server className="h-5 w-5 text-teal-600" />
+          <h4 className="text-lg font-medium">Infrastructure as Code</h4>
+        </div>
+        <p className="text-sm text-slate-700 mb-3">
+          Terraform Cloud manages all Vercel infrastructure:
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div className="rounded-lg bg-slate-50 p-2 text-center">Project config</div>
+          <div className="rounded-lg bg-slate-50 p-2 text-center">Custom domains</div>
+          <div className="rounded-lg bg-slate-50 p-2 text-center">Env variables</div>
+          <div className="rounded-lg bg-slate-50 p-2 text-center">Deploy protection</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SecuritySection() {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <Feature
-        icon={Video}
-        title="Video integration"
-        text="Self-hosted MP4s with Instagram embed fallback. Download scripts for video preparation."
+        icon={Shield}
+        title="OWASP CSP headers"
+        text="Content-Security-Policy with strict defaults, HSTS preload, X-Frame-Options DENY."
       />
       <Feature
-        icon={Languages}
-        title="3 locales"
-        text="en-GB, en-US, it-IT. Titles/descriptions translated, ingredients preserved in English."
+        icon={Lock}
+        title="Pre-commit hooks"
+        text="Husky blocks commits with secrets: OpenAI keys, AWS credentials, Stripe keys, .env files."
+      />
+      <Feature
+        icon={Database}
+        title="Rate limiting"
+        text="Redis-backed with abuse detection. 300 req/5min, auto-ban after 3 violations."
+      />
+      <Feature
+        icon={Eye}
+        title="IP extraction"
+        text="Proper header precedence: CloudFlare → X-Real-IP → X-Forwarded-For → RFC 7239."
       />
       <Feature
         icon={FileText}
-        title="TypeScript recipes"
-        text="Strongly typed recipe objects. 1,600+ lines of validated content data."
+        title="Zod validation"
+        text="Runtime env validation at app start. Server-only vs client-safe separation."
       />
       <Feature
-        icon={Sparkles}
-        title="Kitchen tools page"
-        text="Curated gear recommendations with region-specific Amazon affiliate links."
+        icon={Terminal}
+        title="TruffleHog scan"
+        text="CI scans every commit for leaked secrets. Non-blocking but logged."
       />
     </div>
   );
 }
 
-function Content() {
+function ObservabilitySection() {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <h4 className="mb-3 text-lg font-medium">Type-safe recipe data</h4>
-        <p className="text-sm text-slate-700">
-          Recipes live as TypeScript objects, so titles, ingredients, steps, tags,
-          and locale fields stay consistent and easy to refactor.
+        <div className="mb-2 flex items-center gap-2">
+          <Activity className="h-5 w-5 text-teal-600" />
+          <h4 className="text-lg font-medium">OpenTelemetry</h4>
+        </div>
+        <p className="text-sm text-slate-700 mb-3">
+          Full distributed tracing with OTLP HTTP exporter. Instrumented at Next.js
+          entry point for automatic span creation.
         </p>
+        <div className="flex flex-wrap gap-2 text-xs">
+          <span className="rounded bg-slate-100 px-2 py-1">@opentelemetry/sdk-node</span>
+          <span className="rounded bg-slate-100 px-2 py-1">OTLP exporter</span>
+          <span className="rounded bg-slate-100 px-2 py-1">Jaeger UI</span>
+        </div>
       </div>
       <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <h4 className="mb-2 text-lg font-medium">Video handling</h4>
-        <p className="text-sm text-slate-700">
-          Videos are served MP4-first for speed, with an external fallback when a
-          platform embed breaks or a source disappears.
+        <div className="mb-2 flex items-center gap-2">
+          <FileText className="h-5 w-5 text-teal-600" />
+          <h4 className="text-lg font-medium">Structured logging</h4>
+        </div>
+        <p className="text-sm text-slate-700 mb-3">
+          JSON output in production for log aggregators. Colored dev output.
+          Child loggers for request-scoped context propagation.
         </p>
+        <div className="flex flex-wrap gap-2 text-xs">
+          <span className="rounded bg-slate-100 px-2 py-1">Log levels</span>
+          <span className="rounded bg-slate-100 px-2 py-1">JSON format</span>
+          <span className="rounded bg-slate-100 px-2 py-1">Context injection</span>
+        </div>
+      </div>
+      <div className="rounded-xl border border-slate-200 bg-white p-4 md:col-span-2">
+        <div className="mb-2 flex items-center gap-2">
+          <Server className="h-5 w-5 text-teal-600" />
+          <h4 className="text-lg font-medium">Health endpoint</h4>
+        </div>
+        <p className="text-sm text-slate-700 mb-3">
+          /health route checks all dependencies with proper HTTP status codes:
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div className="rounded-lg bg-green-50 border border-green-200 p-2 text-center text-green-700">Redis ping</div>
+          <div className="rounded-lg bg-green-50 border border-green-200 p-2 text-center text-green-700">OpenAI check</div>
+          <div className="rounded-lg bg-green-50 border border-green-200 p-2 text-center text-green-700">Memory usage</div>
+          <div className="rounded-lg bg-green-50 border border-green-200 p-2 text-center text-green-700">Verbose mode</div>
+        </div>
       </div>
     </div>
   );
@@ -241,28 +391,28 @@ function DesignDecisions() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <DecisionCard
-        title="Ingredients never translated"
-        text="Accidental translation errors could ruin cooking precision. Safety over localization."
+        title="Terraform over ClickOps"
+        text="All Vercel config in code. Reproducible, auditable, version-controlled infrastructure."
       />
       <DecisionCard
-        title="Static-first content"
-        text="No database for recipes. TypeScript objects = compile-time validation, zero runtime errors."
+        title="Non-root Docker user"
+        text="Container runs as uid 1001. Defense in depth against container escape vulnerabilities."
       />
       <DecisionCard
-        title="Self-hosted video strategy"
-        text="Prefer MP4s for speed, Instagram embed as fallback. Minimize external dependencies."
+        title="Redis with fallback"
+        text="Rate limiting uses Upstash, but gracefully degrades to in-memory if unavailable."
       />
       <DecisionCard
-        title="Server-side region detection"
-        text="URL param → Cookie → Accept-Language header. No client-side flashing."
+        title="Pre-commit secret scanning"
+        text="Block commits containing API keys before they hit the repo. Regex patterns for common formats."
       />
       <DecisionCard
-        title="Brand voice as code"
-        text="VOICE.md documents tone rules. Flat, direct, no exclamation marks, no emojis."
+        title="Smoke tests post-deploy"
+        text="CI hits /health and /recipes after Vercel deploy. Catch regressions before users do."
       />
       <DecisionCard
-        title="Abuse protection"
-        text="IP-based rate limiting and basic gating to reduce automated abuse."
+        title="Zod at the boundary"
+        text="Environment validation at app start. Fail fast with clear errors, not cryptic runtime crashes."
       />
     </div>
   );
@@ -273,10 +423,17 @@ function DesignDecisions() {
 function Stats() {
   return (
     <section className="mx-auto max-w-6xl px-6 pb-20">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-        <StatCard value="33" label="Published recipes" />
-        <StatCard value="3" label="Locales supported" />
-        <StatCard value="1.6k" label="Lines of recipe data" />
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <StatCard value="7" label="CI/CD jobs" />
+        <StatCard value="3" label="Docker stages" />
+        <StatCard value="5" label="Docker Compose services" />
+        <StatCard value="100%" label="IaC coverage" />
+      </div>
+      <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <StatCard value="OWASP" label="CSP compliance" />
+        <StatCard value="<50MB" label="Production image" />
+        <StatCard value="4" label="Health checks" />
+        <StatCard value="0" label="Secrets in repo" />
       </div>
     </section>
   );
@@ -370,26 +527,6 @@ function Feature({
       </div>
       <div className="text-sm font-medium">{title}</div>
       <div className="mt-1 text-sm text-slate-600">{text}</div>
-    </div>
-  );
-}
-
-function AgentMode({
-  name,
-  temp,
-  focus,
-}: {
-  name: string;
-  temp: string;
-  focus: string;
-}) {
-  return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">{name}</span>
-        <span className="text-xs text-teal-700">temp: {temp}</span>
-      </div>
-      <div className="mt-1 text-xs text-slate-600">{focus}</div>
     </div>
   );
 }

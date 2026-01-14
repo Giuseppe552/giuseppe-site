@@ -16,7 +16,7 @@ type Project = {
   summary: string;
   meta: string;
   tags: string[];
-  category: "ai" | "nlp" | "infra" | "web";
+  category: "infra" | "web";
   updatedAt: string;
 };
 
@@ -65,48 +65,16 @@ const PROJECTS: Project[] = [
     slug: "/projects/giuseppe-food",
     title: "giuseppe.food",
     summary:
-      "Recipe platform bridging short-form videos to detailed recipes. Multi-region support and type-safe content.",
-    meta: "Recipe Platform",
-    tags: ["Next.js", "i18n", "TypeScript", "Video"],
-    category: "web",
-    updatedAt: "2025-12-15",
-  },
-  {
-    slug: "/projects/calendar-ai",
-    title: "Calendar-AI",
-    summary:
-      "Natural-language → protected focus blocks. OAuth scopes, previews, conflict checks.",
-    meta: "AI + GCal",
-    tags: ["Next.js", "Whisper", "OAuth", "TOTP 2FA"],
-    category: "ai",
-    updatedAt: "2025-10-01",
-  },
-  {
-    slug: "/projects/ats-ranker",
-    title: "ATS Ranker",
-    summary:
-      "Deterministic scoring against job specs with explainable signals—recruiter-friendly.",
-    meta: "NLP + Hiring",
-    tags: ["TypeScript", "NLP", "Parsing"],
-    category: "nlp",
-    updatedAt: "2025-09-10",
-  },
-  {
-    slug: "/projects/infra",
-    title: "Infra as Code",
-    summary:
-      "Repeatable infra with least-privilege, secrets hygiene, metrics & traces.",
-    meta: "Docker + IaC",
-    tags: ["Docker", "CI/CD", "Terraform"],
+      "Open-source recipe platform with production DevOps: 7-job CI/CD, multi-stage Docker, Terraform IaC, OpenTelemetry observability.",
+    meta: "Full-Stack + DevOps",
+    tags: ["Docker", "Terraform", "GitHub Actions", "Next.js"],
     category: "infra",
-    updatedAt: "2025-08-12",
+    updatedAt: "2026-01-14",
   },
 ];
 
 const CATEGORIES = [
   { key: "all", label: "All" },
-  { key: "ai", label: "AI" },
-  { key: "nlp", label: "NLP" },
   { key: "infra", label: "Infra" },
   { key: "web", label: "Web" },
 ] as const;
