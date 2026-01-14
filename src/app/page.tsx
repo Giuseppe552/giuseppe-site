@@ -42,16 +42,6 @@ const PROJECTS: Project[] = [
     updatedAt: "2026-01-08",
   },
   {
-    slug: "/projects/alveriano-infra",
-    title: "Alveriano Platform Infra",
-    summary:
-      "Terraform IaC for serverless infrastructure. Multi-environment, KMS encryption, IAM least privilege.",
-    meta: "Terraform + AWS",
-    tags: ["Terraform", "AWS", "Lambda", "API Gateway"],
-    category: "infra",
-    updatedAt: "2026-01-05",
-  },
-  {
     slug: "/projects/saltaire-guide",
     title: "Saltaire Guide",
     summary:

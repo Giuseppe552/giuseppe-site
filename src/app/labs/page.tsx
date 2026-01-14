@@ -15,7 +15,6 @@ type Lab = {
 };
 
 const LABS: Lab[] = [
-  // NEW: Mini-NOC lab
   {
     slug: "noc",
     title: "Mini-NOC (Incidents Sandbox)",
@@ -23,30 +22,6 @@ const LABS: Lab[] = [
     summary:
       "Trigger incidents, auto-remediate, read service-specific runbooks, and view a live timeline—without touching real infra.",
     cta: { href: "/labs/noc", label: "Open demo" },
-  },
-  {
-    slug: "calendar-ai",
-    title: "Calendar-AI",
-    tag: "AI + GCal",
-    summary:
-      "Type or speak a plan → protected calendar blocks. OAuth, least-privilege scopes, auditable, fast.",
-    cta: { href: "/labs/calendar-ai", label: "Open demo" },
-  },
-  {
-    slug: "ats",
-    title: "ATS Ranker",
-    tag: "NLP + Hiring",
-    summary:
-      "Deterministic resume/job spec scoring with explainable signals. Built for recruiters, not hype.",
-    cta: { href: "/labs/ats", label: "Open demo" },
-  },
-  {
-    slug: "infra",
-    title: "Infra as Code",
-    tag: "Docker + IaC",
-    summary:
-      "Notes and configs for small setups. Still iterating.",
-    cta: { href: "/labs/infra", label: "View notes" },
   },
 ];
 
